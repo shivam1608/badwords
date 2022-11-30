@@ -1,5 +1,4 @@
 const _ = require("lodash");
-const { options } = require("..");
 const { getMiniLists, cleanPayload } = require("../utils/payload");
 
 const wordlist = {

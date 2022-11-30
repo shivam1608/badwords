@@ -9,6 +9,7 @@
 
 const express = require("express");
 const rateLimiter = require("express-rate-limit");
+const check = require("../../middleware");
 
 const limiter = ratelimiter({
   windowMs: 1000, // 1 seconds
@@ -38,7 +39,7 @@ api.all("/langs", (req, res) => {
 /**
  * Now all endpoints which require payload
  */
-// TODO -> ADD THE MIDDLEWARE
+api.use(check);
 
 api.all("/check", (req, res) => {
   res.send({ value: contains(req.payload.toLowerCase().trim(), req.options) });
