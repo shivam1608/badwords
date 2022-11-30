@@ -1,0 +1,38 @@
+{
+  "name": "badwords",
+  "version": "0.0.1",
+  "description": "a community based badwords database and api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev" : "npx nodemon runner.js",
+    "format" : "npx prettier --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shivam1608/badwords.git"
+  },
+  "keywords": [
+    "profanity",
+    "badwords",
+    "filter",
+    "badwords-filter"
+  ],
+  "author": "shivzee",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shivam1608/badwords/issues"
+  },
+  "homepage": "https://github.com/shivam1608/badwords#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.7.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "jest": "^29.3.1",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.0"
+  }
+}
