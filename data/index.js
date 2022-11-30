@@ -1,6 +1,6 @@
 const _ = require("lodash");
 const { options } = require("..");
-const { getMiniLists } = require("../utils/payload");
+const { getMiniLists, cleanPayload } = require("../utils/payload");
 
 const wordlist = {
   0: require("./en_english"), // English wordlist
@@ -55,10 +55,20 @@ const listAll = (payload, options) => {
   return getMiniLists(payload, options, wordlist);
 };
 
-const clean = (payload, options) => {};
+/**
+ *
+ * @param {string} payload the payload from user
+ * @param {object} options the highly customisable set of options
+ * @returns cleaned text is returned
+ */
+const clean = (payload, options) => {
+  return cleanPayload(payload, options, wordlist);
+};
 
 module.exports = {
   contains,
   getTotal,
   langInfo,
+  listAll,
+  clean,
 };

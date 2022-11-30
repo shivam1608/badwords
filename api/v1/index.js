@@ -1,3 +1,12 @@
+/**
+ * API Specification
+ * /langs -> [POST , GET] => get all the language codes
+ * /check -> [POST , GET] => checks if a **single** word is present in the list
+ * /listall -> [POST , GET] => list's all the badwords included in the payload (UTF-8)
+ * /clean -> [POST , GET] => deep cleans (censor) payload (UTF-8)
+ * /simpleclean -> [POST , GET] => simple cleans (censor) payload **word by word**
+ */
+
 const express = require("express");
 const rateLimiter = require("express-rate-limit");
 
@@ -9,6 +18,9 @@ const limiter = ratelimiter({
 });
 
 const api = express.Router();
+api.use(express.json());
+api.use(express.urlencoded({ extended: true }));
+api.use(limiter);
 
 api.get("/", (req, res) => {
   res.send({
@@ -16,6 +28,34 @@ api.get("/", (req, res) => {
     info: "online",
     maintenance: false,
   });
+});
+
+// Get language codes
+api.all("/langs", (req, res) => {
+  res.send(langInfo());
+});
+
+/**
+ * Now all endpoints which require payload
+ */
+// TODO -> ADD THE MIDDLEWARE
+
+api.all("/check", (req, res) => {
+  res.send({ value: contains(req.payload.toLowerCase().trim(), req.options) });
+});
+
+api.all("/listall", (req, res) => {
+  res.send(listContains(req.payload.toLowerCase().trim(), req.options));
+});
+
+// Deep Clean (only works for alphabetical based languages)
+api.all("/clean", (req, res) => {
+  res.send({ value: clean(req.payload.trim(), req.options) });
+});
+
+// Simple Clean
+api.all("/simpleclean", (req, res) => {
+  res.send({ value: simpleClean(req.payload.trim(), req.options) });
 });
 
 module.exports = api;
