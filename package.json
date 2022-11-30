@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev" : "npx nodemon runner.js",
-    "format" : "npx prettier --write ."
+    "dev": "npx nodemon runner.js",
+    "format": "npx prettier --write ."
   },
   "repository": {
     "type": "git",

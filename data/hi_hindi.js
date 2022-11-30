@@ -11,10 +11,10 @@
  * 3. 🏃‍♂️ run `npm run format` before creating a pull request
  */
 
- module.exports = {
-    name: "Hindi_HI",
-    positive: ["गधे", "भोसिदके", "चूतिये"],
-    negative: [],
-  };
-  
-  /** ☝ do not add a new word here at the bottom. add it in lexicographical order */
+module.exports = {
+  name: "Hindi_HI",
+  positive: ["गधे", "भोसिदके", "चूतिये"],
+  negative: [],
+};
+
+/** ☝ do not add a new word here at the bottom. add it in lexicographical order */

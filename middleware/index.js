@@ -1,5 +1,3 @@
-const check = (req , res , next) => {
-    
-}
+const check = (req, res, next) => {};
 
 module.exports = check;
