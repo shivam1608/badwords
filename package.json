@@ -6,7 +6,9 @@
   "scripts": {
     "test": "npx jest",
     "dev": "npx nodemon runner.js",
-    "format": "npx prettier --write ."
+    "format": "npx prettier --write .",
+    "tw:home": "npx tailwindcss -i ./web/home.css -o ./web/home/style.css --watch --minify",
+    "tw:docs": "npx tailwindcss -i ./web/docs.css -o ./web/docs/style.css --watch --minify"
   },
   "repository": {
     "type": "git",
@@ -33,6 +35,7 @@
   "devDependencies": {
     "jest": "^29.3.1",
     "nodemon": "^2.0.20",
-    "prettier": "^2.8.0"
+    "prettier": "^2.8.0",
+    "tailwindcss": "^3.2.4"
   }
 }

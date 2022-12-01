@@ -1,7 +1,5 @@
 const _ = require("lodash");
-const {
-  applyLayer
-} = require("../utils/layers");
+const { applyLayer } = require("../utils/layers");
 const { getMiniLists, cleanPayload } = require("../utils/payload");
 
 const wordlist = {
@@ -62,7 +60,7 @@ const listAll = (payload, options) => {
  * @param {string} paragraph
  * @param {json object} options
  */
- const simpleClean = (paragraph, options) => {
+const simpleClean = (paragraph, options) => {
   let data = [];
   paragraph.split(options.splitter).forEach((word) => {
     data.push(
