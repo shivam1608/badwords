@@ -8,7 +8,14 @@
  */
 
 const express = require("express");
-const rateLimiter = require("express-rate-limit");
+const ratelimiter = require("express-rate-limit");
+const {
+  listAll,
+  clean,
+  simpleClean,
+  langInfo,
+  contains,
+} = require("../../data");
 const check = require("../../middleware");
 
 const limiter = ratelimiter({
@@ -46,7 +53,7 @@ api.all("/check", (req, res) => {
 });
 
 api.all("/listall", (req, res) => {
-  res.send(listContains(req.payload.toLowerCase().trim(), req.options));
+  res.send(listAll(req.payload.toLowerCase().trim(), req.options));
 });
 
 // Deep Clean (only works for alphabetical based languages)

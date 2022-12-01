@@ -1,4 +1,9 @@
 const _ = require("lodash");
+const {
+  applyLayer,
+  applyTemplate,
+  applyMutipleLayer,
+} = require("../utils/layers");
 const { getMiniLists, cleanPayload } = require("../utils/payload");
 
 const wordlist = {
@@ -61,7 +66,60 @@ const listAll = (payload, options) => {
  * @returns cleaned text is returned
  */
 const clean = (payload, options) => {
-  return cleanPayload(payload, options, wordlist);
+  let miniObject = listAll(payload, options);
+  let cleaned = payload;
+  let template = [];
+
+  for (let layer of options.layers) {
+    let layerTemplate = Array(cleaned.length);
+    let { modified, matches } = applyLayer(layer, cleaned);
+
+    matches.forEach((match) => {
+      if (match[0].length !== 1) {
+        for (let o = 0; o < match[0].length - 1; o++) {
+          layerTemplate[match.index + o] = cleaned.charAt(match.index + o);
+        }
+      } else {
+        layerTemplate[match.index] = cleaned.charAt(match.index);
+      }
+    });
+    template.push(layerTemplate);
+    cleaned = cleanPayload(modified, options, miniObject);
+  }
+
+  // Adding cleaned to original template
+  while (template.length > 0) {
+    let layerTemplate = template.pop();
+    let count = 0;
+    for (let i = 0; i < layerTemplate.length; i++) {
+      if (layerTemplate[i] === undefined) {
+        layerTemplate[i] = cleaned[count];
+        count++;
+      }
+    }
+    cleaned = layerTemplate.join("");
+  }
+
+  // final cleenup of cleaned content to prevent extra bypassing
+  for (let i = 0; i < cleaned.length; i++) {
+    let char = cleaned.charAt(i);
+    let right = cleaned.charAt(i + 1);
+    let left = cleaned.charAt(i - 1);
+    if (
+      right &&
+      left &&
+      right === options.placeholder &&
+      left === options.placeholder &&
+      char !== options.placeholder
+    ) {
+      cleaned =
+        cleaned.substring(0, i) +
+        options.placeholder +
+        cleaned.substring(i + 1);
+    }
+  }
+
+  return cleaned;
 };
 
 module.exports = {

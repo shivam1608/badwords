@@ -1,3 +1,5 @@
+const { getTotal } = require("../data");
+
 const check = (req, res, next) => {
   let method = req.method;
   let options = undefined;
@@ -29,7 +31,11 @@ const check = (req, res, next) => {
       ? options.placeholder
       : "*";
   options.exclude = options.exclude ? options.exclude : [];
-  options.layers = options.layers ?? [1, 2, 3, 4];
+  options.layers = options.layers ?? 2;
+
+  if (typeof options.layers === "number") {
+    options.layers = [...Array(options.layers)].map((_, i) => i + 1);
+  }
 
   req.payload = payload;
   req.options = options;

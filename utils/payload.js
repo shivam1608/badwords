@@ -1,5 +1,5 @@
 const _ = require("lodash");
-const applyLayer = require("./layers");
+const { applyLayer } = require("./layers");
 
 const getMiniLists = (payload, options, wordlist) => {
   let miniObject = {
@@ -9,84 +9,67 @@ const getMiniLists = (payload, options, wordlist) => {
   for (const key of options.languages) {
     let positiveList = wordlist[key].positive;
     let negativeList = wordlist[key].negative;
+    let allPayloads = [];
+    let modified = payload;
+    // Push original payload
+    allPayloads.push(modified);
+    for (let layer of options.layers) {
+      // Getting the payload as well as all matched index
+      modified = applyLayer(layer, modified).modified;
+      allPayloads.push(modified);
+    }
+    // Checking for all payload if a word exists in them or not
     if (positiveList) {
       miniObject.positive.push(
         ..._.filter(positiveList, (word) => {
           let isPresent = false;
-          for (let layer in options.layers) {
-            isPresent = isPresent || applyLayer(layer, payload).includes(word);
+          for (let disguised of allPayloads) {
+            isPresent = isPresent || disguised.includes(word);
           }
-          return payload.includes(word);
-        })
-      );
-      miniObject.negative.push(
-        ..._.filter(negativeList, (word) => {
-          return payload.includes(word);
+          return isPresent;
         })
       );
     }
+    miniObject.negative.push(
+      ..._.filter(negativeList, (word) => {
+        return payload.includes(word);
+      })
+    );
   }
   return miniObject;
 };
 
-const cleanPayload = (payload, options, wordlist) => {
-  let safe = { special: {}, ignore: {}, upper: {} };
-  // spearating special chars
-  let count = 0;
-  for (let i = 0; i < payload.length; i++) {
-    let char = payload.charAt(i);
-    if (char.match(/[^\w\s]|_|\s/gim)) {
-      safe.special[i - count] = char;
-      count++;
-    }
-    if (char.match(/[A-Z]/g)) {
-      safe.upper[i] = char;
-    }
-  }
+const cleanPayload = (payload, options, { positive, negative }) => {
+  let safe = { ignore: {}, upper: {} };
+  let modified = payload;
 
   // converting to lowercase for better searching
-  payload = payload.toLowerCase();
+  modified = modified.toLowerCase();
   negative.push(...options.exclude);
 
-  const { positive, negative } = getMiniLists(payload, options, wordlist);
+  negative.forEach((word) => {
+    let index = modified.indexOf(word);
+    safe.ignore[index] = word;
+  });
 
-  for (let layer in options) {
-    // Looping through all filtering layers
-    payload = applyLayer(layer, payload);
+  positive.forEach((word) => {
+    modified = modified.replace(
+      new RegExp(`${word}`, "gmi"),
+      Array(word.length + 1).join(options.placeholder)
+    );
+  });
 
-    negative.forEach((word) => {
-      let index = payload.indexOf(word);
-      safe.ignore[index] = word;
-    });
-
-    positive.forEach((word) => {
-      payload = payload.replace(
-        new RegExp(`${word}`, "gmi"),
-        Array(word.length + 1).join(options.placeholder)
-      );
-    });
-  }
-
+  // adding back negatives
   let index = 0;
   let cleaned = "";
-  while (index <= payload.length) {
+  while (index <= modified.length) {
     let safeWord = safe.ignore[index];
     if (safeWord) {
       cleaned += safeWord;
-      index += safeWord.length === 1 ? 0 : safeWord.length;
+      index += safeWord.length;
     }
-    cleaned += payload.charAt(index);
+    cleaned += modified.charAt(index);
     index++;
-  }
-
-  count = 0;
-  for (const key of Object.keys(safe.special)) {
-    let i = parseInt(key) + count;
-    cleaned =
-      cleaned.substring(0, parseInt(key) + count) +
-      safe.special[key] +
-      cleaned.substring(parseInt(key) + count);
-    count++;
   }
 
   // adding all uppercase letters back
@@ -97,24 +80,6 @@ const cleanPayload = (payload, options, wordlist) => {
         cleaned.substring(0, i) + safe.upper[i] + cleaned.substring(i + 1);
     }
   }
-
-  // final clean up
-  for (let i = 0; i < cleaned.length; i++) {
-    let char = cleaned.charAt(i);
-    let right = cleaned.charAt(i + 1);
-    let left = cleaned.charAt(i - 1);
-    if (
-      right &&
-      left &&
-      right === options.placeholder &&
-      left === options.placeholder &&
-      char.match(/[^\w\s]|_|\s/gim) &&
-      char !== options.placeholder
-    ) {
-      cleaned = cleaned.substring(0, i) + cleaned.substring(i + 1);
-    }
-  }
-
   return cleaned;
 };
 

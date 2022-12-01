@@ -1,28 +1,26 @@
+const { LAYER_ONE_REGEX, LAYER_TWO_REGEX } = require("../config");
+
+const getMatch = (regex, payload, replace = "") => {
+  let match = null;
+  let allMatch = [];
+  while ((match = regex.exec(payload)) != null) {
+    allMatch.push(match);
+  }
+  return { modified: payload.replace(regex, replace), matches: allMatch };
+};
+
 const applyLayer = (layer, payload) => {
   switch (layer) {
     case 1: {
-      return payload;
+      return getMatch(LAYER_ONE_REGEX, payload);
     }
     case 2: {
-      return payload.replace(/[^\w\s]|_|/gim, "");
-    }
-    case 3: {
-      return payload.replace(/\s/gim, "");
-    }
-    case 4: {
-      let altered = "";
-      for (let i = 0; i < altered.length; i++) {
-        let char = payload.charAt(i);
-        if (altered.charAt(altered.length - 1) !== char) {
-          altered += char;
-        }
-      }
-      return altered;
+      return getMatch(LAYER_TWO_REGEX, payload, "$1");
     }
     default: {
-      return payload;
+      return getMatch(/(.)/gim, payload);
     }
   }
 };
 
-module.exports = applyLayer;
+module.exports = { applyLayer };
