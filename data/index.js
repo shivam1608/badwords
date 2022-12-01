@@ -1,8 +1,6 @@
 const _ = require("lodash");
 const {
-  applyLayer,
-  applyTemplate,
-  applyMutipleLayer,
+  applyLayer
 } = require("../utils/layers");
 const { getMiniLists, cleanPayload } = require("../utils/payload");
 
@@ -60,6 +58,23 @@ const listAll = (payload, options) => {
 };
 
 /**
+ * a simple function to replace badwords with a placeholder
+ * @param {string} paragraph
+ * @param {json object} options
+ */
+ const simpleClean = (paragraph, options) => {
+  let data = [];
+  paragraph.split(options.splitter).forEach((word) => {
+    data.push(
+      contains(word, options)
+        ? Array(word.length + 1).join(options.placeholder)
+        : word
+    );
+  });
+  return data.join(options.joiner);
+};
+
+/**
  *
  * @param {string} payload the payload from user
  * @param {object} options the highly customisable set of options
@@ -70,6 +85,7 @@ const clean = (payload, options) => {
   let cleaned = payload;
   let template = [];
 
+  // Apply nested layers
   for (let layer of options.layers) {
     let layerTemplate = Array(cleaned.length);
     let { modified, matches } = applyLayer(layer, cleaned);
@@ -123,6 +139,7 @@ const clean = (payload, options) => {
 };
 
 module.exports = {
+  simpleClean,
   contains,
   getTotal,
   langInfo,

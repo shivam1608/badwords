@@ -30,6 +30,8 @@ const check = (req, res, next) => {
     options.placeholder && options.placeholder.length === 1
       ? options.placeholder
       : "*";
+  options.splitter = options.splitter ?? " ";
+  options.joiner = options.joiner ?? " ";
   options.exclude = options.exclude ? options.exclude : [];
   options.layers = options.layers ?? 2;
 
