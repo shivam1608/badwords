@@ -4,11 +4,220 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A community powered profanity/badwords filter database and api"
+    />
+    <meta
+      name="keywords"
+      content="profanity,badwords,badwords filter,profanity filter,free profanity api"
+    />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/favicon-16x16.png"
+    />
+    <link rel="manifest" href="assets/site.webmanifest" />
+    <script src="https://unpkg.com/alpinejs"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@highlightjs/cdn-assets@11.7.0/styles/default.min.css"
+    />
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@11.7.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it@13.0.1/dist/markdown-it.min.js"></script>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="dracula.css" />
     <script src="script.js"></script>
     <title>Badwords: Documentation</title>
   </head>
-  <body>
-    under developement
+  <body x-data="{ sidenav: true }" x-on:keydown.window.escape="sidenav = false">
+    <nav class="navbar">
+      <div class="left">
+        <button x-transition @click="sidenav=!sidenav">
+          <svg
+            x-show="sidenav"
+            class="block md:hidden px-2 w-14 h-auto"
+            fill="#FFFFFF"
+            clip-rule="evenodd"
+            fill-rule="evenodd"
+            stroke-linejoin="round"
+            stroke-miterlimit="2"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="m13 16.745c0-.414-.336-.75-.75-.75h-9.5c-.414 0-.75.336-.75.75s.336.75.75.75h9.5c.414 0 .75-.336.75-.75zm9-5c0-.414-.336-.75-.75-.75h-18.5c-.414 0-.75.336-.75.75s.336.75.75.75h18.5c.414 0 .75-.336.75-.75zm-4-5c0-.414-.336-.75-.75-.75h-14.5c-.414 0-.75.336-.75.75s.336.75.75.75h14.5c.414 0 .75-.336.75-.75z"
+              fill-rule="nonzero"
+            />
+          </svg>
+          <svg
+            x-show="!sidenav"
+            class="block md:hidden px-2 w-14 h-auto"
+            fill="#FFFFFF"
+            clip-rule="evenodd"
+            fill-rule="evenodd"
+            stroke-linejoin="round"
+            stroke-miterlimit="2"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="m12 10.93 5.719-5.72c.146-.146.339-.219.531-.219.404 0 .75.324.75.749 0 .193-.073.385-.219.532l-5.72 5.719 5.719 5.719c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.385-.073-.531-.219l-5.719-5.719-5.719 5.719c-.146.146-.339.219-.531.219-.401 0-.75-.323-.75-.75 0-.192.073-.384.22-.531l5.719-5.719-5.72-5.719c-.146-.147-.219-.339-.219-.532 0-.425.346-.749.75-.749.192 0 .385.073.531.219z"
+            />
+          </svg>
+        </button>
+        <div class="nav-logo whitespace-nowrap">🤬Badwords</div>
+      </div>
+      <div class="right">
+        <a class="nav-item hidden md:block" href="/">Home</a>
+        <button @click="openGithub()" class="nav-item">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="#F1F1F1"
+            width="36"
+            height="36"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+            />
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <section class="docs-content">
+      <div :class="{'hidden' : sidenav}" class="md:block side-nav">
+        <div
+          class="fixed md:relative flex flex-col w-64 h-screen px-4 py-8 bg-[#121212]"
+        >
+          <div
+            x-cloak
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="translate-x-full"
+            x-transition:enter-end="translate-x-0"
+            x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="translate-x-0"
+            x-transition:leave-end="translate-x-full"
+            x-on:click.away="sidenav = false"
+            class="fixed"
+          >
+            <div class="flex flex-col justify-between flex-1 mt-2">
+              <nav>
+                <div class="flex flex-col" x-data="{drop : false}">
+                  <button @click="drop=!drop" class="sn-heading">
+                    <span class="mx-4 font-medium">Getting Started</span>
+                    <svg
+                      class="text-white w-8 h-auto"
+                      clip-rule="evenodd"
+                      fill="rgb(156 163 175)"
+                      fill-rule="evenodd"
+                      stroke-linejoin="round"
+                      stroke-miterlimit="2"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="m16.843 10.211c.108-.141.157-.3.157-.456 0-.389-.306-.755-.749-.755h-8.501c-.445 0-.75.367-.75.755 0 .157.05.316.159.457 1.203 1.554 3.252 4.199 4.258 5.498.142.184.36.29.592.29.23 0 .449-.107.591-.291 1.002-1.299 3.044-3.945 4.243-5.498z"
+                      />
+                    </svg>
+                  </button>
+                  <div x-transition x-cloak x-show="drop">
+                    <a href="#menu" class="ml-6 text-base sn-heading">
+                      <button>Menu</button>
+                    </a>
+                    <a href="#menu2" class="ml-6 text-base sn-heading">
+                      <button>Menu</button>
+                    </a>
+                    <a href="#menu3" class="ml-6 text-base sn-heading">
+                      <button>Menu</button>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="flex flex-col" x-data="{drop : false}">
+                  <button @click="drop=!drop" class="sn-heading">
+                    <span class="mx-4 font-medium">API Guide</span>
+                    <svg
+                      class="text-white w-8 h-auto"
+                      clip-rule="evenodd"
+                      fill="rgb(156 163 175)"
+                      fill-rule="evenodd"
+                      stroke-linejoin="round"
+                      stroke-miterlimit="2"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="m16.843 10.211c.108-.141.157-.3.157-.456 0-.389-.306-.755-.749-.755h-8.501c-.445 0-.75.367-.75.755 0 .157.05.316.159.457 1.203 1.554 3.252 4.199 4.258 5.498.142.184.36.29.592.29.23 0 .449-.107.591-.291 1.002-1.299 3.044-3.945 4.243-5.498z"
+                      />
+                    </svg>
+                  </button>
+                  <div x-transition x-cloak x-show="drop">
+                    <a href="#menu" class="ml-6 text-base sn-heading">
+                      <button>Menu</button>
+                    </a>
+                    <a href="#menu2" class="ml-6 text-base sn-heading">
+                      <button>Menu</button>
+                    </a>
+                    <a href="#menu3" class="ml-6 text-base sn-heading">
+                      <button>Menu</button>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="flex flex-col" x-data="{drop : false}">
+                  <button @click="drop=!drop" class="sn-heading">
+                    <span class="mx-4 font-medium">Contributing</span>
+                    <svg
+                      class="text-white w-8 h-auto"
+                      clip-rule="evenodd"
+                      fill="rgb(156 163 175)"
+                      fill-rule="evenodd"
+                      stroke-linejoin="round"
+                      stroke-miterlimit="2"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="m16.843 10.211c.108-.141.157-.3.157-.456 0-.389-.306-.755-.749-.755h-8.501c-.445 0-.75.367-.75.755 0 .157.05.316.159.457 1.203 1.554 3.252 4.199 4.258 5.498.142.184.36.29.592.29.23 0 .449-.107.591-.291 1.002-1.299 3.044-3.945 4.243-5.498z"
+                      />
+                    </svg>
+                  </button>
+                  <div x-transition x-cloak x-show="drop">
+                    <a href="#menu" class="ml-6 text-base sn-heading">
+                      <button>Menu</button>
+                    </a>
+                    <a href="#menu2" class="ml-6 text-base sn-heading">
+                      <button>Menu</button>
+                    </a>
+                    <a href="#menu3" class="ml-6 text-base sn-heading">
+                      <button>Menu</button>
+                    </a>
+                  </div>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real Docs Section (will fetch and populate markdown using javascript) -->
+      <div class="w-full h-screen bg-[#121212] overflow-y-scroll pb-20">
+        <div
+          @hashchange.window="lazyLoadDoc(location.hash);"
+          id="docs"
+          class="min-w-full py-8 px-4 overflow-x-hidden prose-invert prose md:prose-lg lg:prose-xl"
+        ></div>
+      </div>
+    </section>
   </body>
 </html>

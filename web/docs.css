@@ -3,7 +3,43 @@
 @tailwind utilities;
 
 @layer components {
+  .body {
+    @apply bg-[#141414];
+  }
   .heading {
-    @apply text-3xl text-center text-blue-500 font-bold;
+    @apply p-4 text-4xl md:text-7xl text-center font-bold text-white;
+  }
+  .sub-heading {
+    @apply text-xl md:text-3xl text-center text-white;
+  }
+  .navbar {
+    @apply bg-[#121212] shadow-md flex items-center justify-between flex-wrap p-6 fixed w-full z-10 top-0 mb-10;
+  }
+  .navbar-active {
+    @apply bg-opacity-80 backdrop-blur-md;
+  }
+  .nav-item {
+    @apply text-xl md:text-2xl p-2 text-white;
+  }
+  .nav-logo {
+    @apply text-2xl md:text-3xl text-white font-bold;
+  }
+  .left {
+    @apply flex justify-start;
+  }
+  .right {
+    @apply flex justify-end w-max;
+  }
+  .docs-content {
+    @apply flex justify-start mt-20 fixed w-full;
+  }
+  .side-nav {
+    @apply h-screen;
+  }
+  .side-nav-item {
+    @apply px-4 py-2 text-center font-bold text-white;
+  }
+  .sn-heading {
+    @apply font-medium flex items-center px-4 py-2 text-gray-400 transition-colors duration-300 transform rounded-md hover:bg-gray-700;
   }
 }
