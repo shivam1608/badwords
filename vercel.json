@@ -16,11 +16,11 @@
       "dest": "index.js"
     },
     {
-        "src": "/",
+        "src": "/web/home",
         "dest": "web/home/index.html"
     },
     {
-        "src": "/(.+)",
+        "src": "/web/(.+)",
         "dest": "web/$1"
     }
   ]
