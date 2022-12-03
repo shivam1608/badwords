@@ -32,6 +32,10 @@
         "dest": "web/home/assets/$1"
     },
     {
+      "src": "/docs/(.*(js|css))",
+      "dest": "web/docs/$1"
+    },
+    {
         "src": "/docs/(.*)",
         "dest": "web/docs/$1"
     }
