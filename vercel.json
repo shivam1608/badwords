@@ -24,6 +24,10 @@
         "dest": "web/home"
     },
     {
+        "src": "/(.*(css|js)|assets)",
+        "dest": "web/home"
+    },
+    {
         "src": "/(.+)",
         "dest": "web/$1"
     }
