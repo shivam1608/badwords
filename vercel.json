@@ -6,7 +6,7 @@
       "use": "@now/node"
     },
     {
-        "src": "web/**",
+        "src": "web/**/*",
         "use": "@vercel/static"
     }
   ],
