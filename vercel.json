@@ -32,16 +32,8 @@
         "dest": "web/home/assets"
     },
     {
-        "src": "/(.+)",
-        "dest": "web/$1"
-    },
-    {
-      "src": "/(.+)/(.*(css|js)",
-      "dest": "web/$1/$2"
-    },
-    {
-        "src": "/(.+)/(.+)",
-        "dest": "web/$1/$2"
+        "src": "/**/*",
+        "dest": "web/"
     }
   ]
 }
