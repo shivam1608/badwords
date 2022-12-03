@@ -12,15 +12,23 @@
   ],
   "routes": [
     {
+      "src": "/api",
+      "dest": "index.js"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "index.js"
     },
     {
-        "src": "/web/home",
+        "src": "/",
         "dest": "web/home/index.html"
     },
     {
-        "src": "/web/(.+)",
+        "src": "/docs",
+        "dest": "web/docs/index.html"
+    },
+    {
+        "src": "/(.+)",
         "dest": "web/$1"
     }
   ]
