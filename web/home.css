@@ -54,6 +54,9 @@
   .bdg-gray {
     @apply bg-gray-600 text-white;
   }
+  .bdg-black{
+    @apply bg-gray-900 text-white
+  }
   .stats-info {
     @apply order-last text-lg font-medium text-gray-300;
   }
