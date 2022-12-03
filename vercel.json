@@ -24,10 +24,6 @@
         "dest": "web/home/index.html"
     },
     {
-        "src": "/docs",
-        "dest": "web/docs/index.html"
-    },
-    {
         "src": "/(.+)",
         "dest": "web/$1"
     }
