@@ -4,12 +4,24 @@
     {
       "src": "index.js",
       "use": "@now/node"
+    },
+    {
+        "src": "web/**",
+        "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/api/(.*)",
       "dest": "index.js"
+    },
+    {
+        "src": "/",
+        "dest": "web/home/index.html"
+    },
+    {
+        "src": "/(.+)",
+        "dest": "web/$1"
     }
   ]
 }
