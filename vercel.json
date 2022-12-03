@@ -21,7 +21,7 @@
     },
     {
         "src": "/",
-        "dest": "web/home/index.html"
+        "dest": "web/home/"
     },
     {
         "src": "/(.+)",
