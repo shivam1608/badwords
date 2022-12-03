@@ -28,12 +28,12 @@
         "dest": "web/home/$1"
     },
     {
-        "src": "/assets",
-        "dest": "web/home/assets"
+        "src": "/assets/(.*)",
+        "dest": "web/home/assets/$1"
     },
     {
-        "src": "/**/*",
-        "dest": "web/"
+        "src": "/docs/(.*)",
+        "dest": "web/docs/$1"
     }
   ]
 }
