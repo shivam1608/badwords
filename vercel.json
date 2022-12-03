@@ -20,10 +20,6 @@
       "dest": "index.js"
     },
     {
-        "src": "/",
-        "dest": "web/home/"
-    },
-    {
         "src": "/(.+)",
         "dest": "web/$1"
     }
