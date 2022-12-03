@@ -36,12 +36,12 @@
       "dest": "web/docs"
     },
     {
-      "src": "/docs/(.*(js|css))",
+      "src": "/docs/(.+)",
       "dest": "web/docs/$1"
     },
     {
-      "src": "/docs/assets/(.*)",
-      "dest": "web/docs/assets/$1"
+        "src": "/docs/(.*)",
+        "dest": "web/docs/$1"
     }
   ]
 }
