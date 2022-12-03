@@ -36,7 +36,7 @@
       "dest": "web/docs/$1"
     },
     {
-      "src": "/docs/",
+      "src": "/docs",
       "dest": "web/docs/"
     },
     {
