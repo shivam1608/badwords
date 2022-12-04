@@ -20,6 +20,16 @@ const sendDemoRequest = async (req) => {
   });
 }
 
+const getApiInfo = async () => {
+  let response = await fetch("/api");
+  response = await response.json();
+  let totalwords = response.data.totalwords;
+  let total = response.data.total;
+  return new Promise((resolve) => {
+    resolve({totalwords , total});
+  })
+}
+
 window.onload = () => {
   document.getElementsByClassName("hidden-text")[0].classList.remove("hidden");
 };

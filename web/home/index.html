@@ -118,8 +118,8 @@
       </div>
     </section>
 
-    <section class="md:flex justify-center w-full hidden">
-      <div class="max-w-6xl">
+    <section x-data="{totalwords : '' , total : ''}" class="md:flex justify-center w-full hidden">
+      <div x-init="{totalwords , total} = await getApiInfo();" class="max-w-6xl">
         <div class="mt-8 sm:mt-12">
           <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <div
@@ -135,7 +135,7 @@
             >
               <dt class="stats-info">Words in Database</dt>
 
-              <dd class="stats-title">24m</dd>
+              <dd class="stats-title"><span x-text="totalwords">...</span></dd>
             </div>
 
             <div
@@ -143,7 +143,7 @@
             >
               <dt class="stats-info">Languages</dt>
 
-              <dd class="stats-title">3</dd>
+              <dd class="stats-title"><span x-text="total">...</span></dd>
             </div>
           </dl>
         </div>
