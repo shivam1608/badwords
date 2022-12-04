@@ -43,7 +43,7 @@
     @apply flex flex-col items-center text-white;
   }
   .badge {
-    @apply whitespace-nowrap rounded-md px-2.5 py-0.5 m-2 text-sm;
+    @apply whitespace-nowrap rounded-md px-2 md:px-2.5 py-0.5 m-2 text-xs md:text-sm;
   }
   .bdg-sky {
     @apply bg-cyan-700 text-white;
@@ -55,7 +55,7 @@
     @apply bg-gray-600 text-white;
   }
   .bdg-black{
-    @apply bg-gray-900 text-white
+    @apply bg-gray-800 text-white
   }
   .stats-info {
     @apply order-last text-lg font-medium text-gray-300;
