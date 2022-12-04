@@ -80,7 +80,10 @@
     </section>
 
     <section class="p-10 w-full mt-20">
-      <div x-data='{time : "50ms" ,response : "" , request : `{ \n\t"payload" : "this is a shitty payload",\n\t"options" : {\n\t\t"layers" : [1 , 2],\n\t\t"languages" : [0 , 1 , 2] \n\t} \n}`}' class="flex flex-col md:flex-row md:justify-center items-center">
+      <div
+        x-data='{time : "50ms" ,response : "" , request : `{ \n\t"payload" : "this is a shitty payload",\n\t"options" : {\n\t\t"layers" : [1 , 2],\n\t\t"languages" : [0 , 1 , 2] \n\t} \n}`}'
+        class="flex flex-col md:flex-row md:justify-center items-center"
+      >
         <textarea
           x-data="{
           resizeTextarea() {
@@ -95,11 +98,17 @@
           placeholder="REQUEST"
           class="textarea w-full md:max-w-2xl md:w-2/5"
         >
-    </textarea
-        >
+        </textarea>
         <div class="flex flex-row md:flex-col justify-center">
-          <button @click="{response , time} = (await sendDemoRequest(request));" class="btn btn-primary">Try it 🚀</button>
-          <span class="text-center text-white font-bold my-auto">⌚<span x-text="time"></span></span>
+          <button
+            @click="{response , time} = (await sendDemoRequest(request));"
+            class="btn btn-primary"
+          >
+            Try it 🚀
+          </button>
+          <span class="text-center text-white font-bold my-auto"
+            >⌚<span x-text="time"></span
+          ></span>
         </div>
         <textarea
           x-model="response"
@@ -118,8 +127,14 @@
       </div>
     </section>
 
-    <section x-data="{totalwords : '' , total : ''}" class="md:flex justify-center w-full hidden">
-      <div x-init="{totalwords , total} = await getApiInfo();" class="max-w-6xl">
+    <section
+      x-data="{totalwords : '' , total : ''}"
+      class="md:flex justify-center w-full hidden"
+    >
+      <div
+        x-init="{totalwords , total} = await getApiInfo();"
+        class="max-w-6xl"
+      >
         <div class="mt-8 sm:mt-12">
           <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <div

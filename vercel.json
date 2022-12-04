@@ -6,8 +6,8 @@
       "use": "@vercel/node"
     },
     {
-        "src": "web/**/*",
-        "use": "@vercel/static"
+      "src": "web/**/*",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -28,16 +28,16 @@
       "dest": "web/docs/$1"
     },
     {
-        "src": "/",
-        "dest": "web/home"
+      "src": "/",
+      "dest": "web/home"
     },
     {
-        "src": "/(.*(css|js)?)",
-        "dest": "web/home/$1"
+      "src": "/(.*(css|js)?)",
+      "dest": "web/home/$1"
     },
     {
-        "src": "/assets/(.*)",
-        "dest": "web/home/assets/$1"
+      "src": "/assets/(.*)",
+      "dest": "web/home/assets/$1"
     },
     {
       "src": "/(.*)",

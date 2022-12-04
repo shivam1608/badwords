@@ -47,7 +47,6 @@ const lazyLoadDoc = async (hash) => {
   DOC.innerHTML = parser.render(markdown);
 };
 
-
 const openGithub = () => {
   window.location = "https://github.com/shivam1608/badwords";
 };
