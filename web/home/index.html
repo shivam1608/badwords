@@ -98,7 +98,7 @@
     </textarea
         >
         <div class="flex flex-row md:flex-col justify-center">
-          <button @click="response = sendDemoRequest(request).response;" class="btn btn-primary">Try it 🚀</button>
+          <button @click="{response , time} = (await sendDemoRequest(request));" class="btn btn-primary">Try it 🚀</button>
           <span class="text-center text-white font-bold my-auto">⌚<span x-text="time"></span></span>
         </div>
         <textarea
