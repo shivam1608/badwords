@@ -35,6 +35,7 @@ api.get("/", (req, res) => {
     message: "API Server is Running 🟢",
     info: "online",
     maintenance: false,
+    data : langInfo(),
   });
 });
 
