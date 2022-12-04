@@ -20,6 +20,14 @@
       "dest": "index.js"
     },
     {
+      "src": "/docs/",
+      "dest": "web/docs"
+    },
+    {
+      "src": "/docs/(.+)",
+      "dest": "web/docs/$1"
+    },
+    {
         "src": "/",
         "dest": "web/home"
     },
@@ -30,14 +38,6 @@
     {
         "src": "/assets/(.*)",
         "dest": "web/home/assets/$1"
-    },
-    {
-      "src": "/docs/",
-      "dest": "web/docs"
-    },
-    {
-      "src": "/docs/(.+)",
-      "dest": "web/docs/$1"
     },
     {
       "src": "/(.*)",
