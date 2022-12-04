@@ -10,7 +10,7 @@ This repo is mostly dependent upon `pull requests` from the contributers to impr
 badwords has some cool api endpoint to intreact with the documentation (not compeleted yet) can be find [here](https://badwords.vercel.app/docs/)
 
 ### Base urls
-hosted on [vercel](https://vercel.com) and [deta](https://deta.dev) for now
+hosted on [vercel](https://vercel.com) and [deta](https://deta.sh) for now
 > `https://badwords.deta.dev/api`
 > `https://badwords.vercel.app/api`
 
