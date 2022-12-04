@@ -24,7 +24,7 @@ const langInfo = () => {
   for (const key of Object.keys(wordlist)) {
     let obj = wordlist[key];
     info[key] = obj.name;
-    info["totalwords"] += obj.positive.length+obj.negative.length;
+    info["totalwords"] += obj.positive.length + obj.negative.length;
   }
   info["total"] = Object.keys(wordlist).length;
   return info;
