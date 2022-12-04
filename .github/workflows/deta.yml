@@ -1,0 +1,40 @@
+name: Deploy to Deta
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      DETA-NAME: badwords
+      DETA-PROJECT: badwords
+    steps:
+      - uses: actions/checkout@v2
+      # Formating code (helps when wordlist exceed's 2MiB)
+      - name: Formating the Code
+        shell: bash
+        run: npm run format
+      # Installing the Deta CLI
+      - name: Install Deta CLI
+        shell: bash
+        run: |
+          curl -fsSL https://get.deta.dev/cli.sh | sh
+      - name: Clone the micro & copying the Repo
+        shell: bash
+        run: |
+          export DETA_ACCESS_TOKEN=${{ secrets.DETA_TOKEN }}
+          mkdir -p tmp/${{env.DETA-NAME}}
+          ~/.deta/bin/deta clone --name ${{env.DETA-NAME}} --project ${{env.DETA-PROJECT}} tmp/${{env.DETA-NAME}}
+          cp -r tmp/${{env.DETA-NAME}}/.deta .
+          rm -rf tmp/${{env.DETA-NAME}}
+          if ! [ "$(ls -A tmp/)" ]; then
+              rm -r tmp/
+          fi
+      # Finally Deploying to Deta Micro
+      - name: Deploying to Deta
+        shell: bash
+        run: |
+          export DETA_ACCESS_TOKEN=${{ secrets.DETA_TOKEN }}
+          cd .
+          ~/.deta/bin/deta deploy
