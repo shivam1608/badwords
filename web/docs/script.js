@@ -17,7 +17,7 @@ window.onload = () => {
       }
 
       return (
-        '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + "</code></pre>"
+        '<pre class="hljs"><code>' + parser.utils.escapeHtml(str) + "</code></pre>"
       );
     },
     html: true,
