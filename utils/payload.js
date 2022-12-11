@@ -52,7 +52,7 @@ const cleanPayload = (payload, options, { positive, negative }) => {
     while (index !== -1) {
       safe.ignore[index] = word;
       let tmp = modified.substring(index+word.length).indexOf(word);
-      index = tmp === -1?-1:tmp+index;
+      index = tmp === -1?-1:tmp+word.length+index;
     }
   });
 
