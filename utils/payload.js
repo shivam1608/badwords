@@ -50,9 +50,9 @@ const cleanPayload = (payload, options, { positive, negative }) => {
   negative.forEach((word) => {
     let tmp = modified;
     let index = tmp.indexOf(word);
-    while(index!==-1){
+    while (index !== -1) {
       safe.ignore[index] = word;
-      tmp = tmp.substring(index);
+      tmp = tmp.substring(index+word.length);
       index = tmp.indexOf(word);
     }
   });
