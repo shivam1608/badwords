@@ -949,7 +949,6 @@ module.exports = {
     "assassinator",
     "assassinatress",
     "assassinist",
-    "assassins",
     "assate",
     "assation",
     "assaugement",
