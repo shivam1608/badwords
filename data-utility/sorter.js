@@ -4,7 +4,7 @@
  *
  * This file sorts or arrange in lexicographicaly of the positive inputs in the word list
  */
-const { positive } = require("../data/hen_hinglish");
+const { positive } = require("../data/en_english");
 const fs = require("fs");
 
 try {
