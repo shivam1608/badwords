@@ -71,6 +71,7 @@ const cleanPayload = (payload, options, { positive, negative }) => {
     if (safeWord) {
       cleaned += safeWord;
       index += safeWord.length;
+      continue;
     }
     cleaned += modified.charAt(index);
     index++;
