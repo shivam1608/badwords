@@ -13,7 +13,7 @@
 
 module.exports = {
   name: "Hinglish_HEN",
-  positive:  [
+  positive: [
     "behenkichoot",
     "behnchod",
     "bhadwa",
