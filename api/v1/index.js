@@ -8,7 +8,6 @@
  */
 
 const express = require("express");
-const ratelimiter = require("express-rate-limit");
 const {
   listAll,
   clean,
@@ -18,17 +17,21 @@ const {
 } = require("../../data");
 const check = require("../../middleware");
 
-const limiter = ratelimiter({
-  windowMs: 1000, // 1 seconds
-  max: 4, // Limit each IP to 4 Query/Second
-  standardHeaders: true,
-  legacyHeaders: false,
-});
-
 const api = express.Router();
 api.use(express.json());
 api.use(express.urlencoded({ extended: true }));
-api.use(limiter);
+
+// Ratelimiters don't work and are unnecessary on Deta, only enable ratelimiter if not on Deta
+if (proccess.env.DETA_RUNTIME !== 'true') {
+  const ratelimiter = require("express-rate-limit");
+  const limiter = ratelimiter({
+    windowMs: 1000, // 1 seconds
+    max: 4, // Limit each IP to 4 Query/Second
+    standardHeaders: true,
+    legacyHeaders: false,
+  });
+  api.use(limiter);
+}
 
 api.get("/", (req, res) => {
   res.send({
