@@ -8,6 +8,7 @@
  */
 
 const express = require("express");
+const { DETA_RUNTIME } = require("../../config");
 const {
   listAll,
   clean,
@@ -22,7 +23,7 @@ api.use(express.json());
 api.use(express.urlencoded({ extended: true }));
 
 // Ratelimiters don't work and are unnecessary on Deta, only enable ratelimiter if not on Deta
-if (proccess.env.DETA_RUNTIME !== 'true') {
+if (DETA_RUNTIME !== 'true') {
   const ratelimiter = require("express-rate-limit");
   const limiter = ratelimiter({
     windowMs: 1000, // 1 seconds
